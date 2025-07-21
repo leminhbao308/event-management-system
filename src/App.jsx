@@ -11,6 +11,8 @@ import MainLayout from './layouts/mainLayout';
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
 import Dashboard from './pages/Dashboard.jsx';
+import UserProfile from './pages/UserProfile.jsx';
+import AdminUserManagement from './pages/AdminUserManagement.jsx';
 import Unauthorized from './pages/Unauthorized.jsx';
 import useThemeContext from './hooks/useThemeContext';
 
@@ -42,7 +44,23 @@ function AppContent() {
           </ProtectedRoute>
         } />
 
+        {/* User Profile Route */}
+        <Route path="/profile" element={
+          <ProtectedRoute>
+            <MainLayout>
+              <UserProfile />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
+
         {/* Admin Only Routes */}
+        <Route path="/admin/users" element={
+          <ProtectedRoute roles={['ADMIN']}>
+            <MainLayout>
+              <AdminUserManagement />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
         <Route path="/admin/*" element={
           <ProtectedRoute roles={['ADMIN']}>
             <MainLayout>
