@@ -18,11 +18,21 @@ const { Header, Sider, Content } = Layout;
 
 const MainLayout = ({ children }) => {
   const [collapsed, setCollapsed] = useState(false);
+  const [settingsModalVisible, setSettingsModalVisible] = useState(false);
   const { isDarkMode, setTheme, currentColors } = useThemeContext();
 
   // Handle theme change
   const handleThemeChange = (checked) => {
     setTheme(checked);
+  };
+
+  // Handle settings modal
+  const showSettingsModal = () => {
+    setSettingsModalVisible(true);
+  };
+
+  const hideSettingsModal = () => {
+    setSettingsModalVisible(false);
   };
 
   const {
@@ -72,7 +82,7 @@ const MainLayout = ({ children }) => {
             <Button
               type="text"
               icon={<SettingOutlined />}
-              onClick={() => alert('Expand sidebar to access settings')}
+              onClick={showSettingsModal}
               style={{
                 width: '100%',
                 height: 40,
@@ -88,9 +98,23 @@ const MainLayout = ({ children }) => {
             <SettingPopup
               isDarkMode={isDarkMode}
               onThemeChange={handleThemeChange}
+              showModal={showSettingsModal}
+              isModalVisible={false}
+              onModalClose={hideSettingsModal}
+              showTriggerButton={true}
             />
           )}
         </div>
+
+        {/* Settings Modal - Always present for collapsed sidebar */}
+        <SettingPopup
+          isDarkMode={isDarkMode}
+          onThemeChange={handleThemeChange}
+          showModal={showSettingsModal}
+          isModalVisible={settingsModalVisible}
+          onModalClose={hideSettingsModal}
+          showTriggerButton={false}
+        />
       </Sider>
 
       <Layout>

@@ -247,13 +247,13 @@ const colorConstants = {
 
     // Text Colors (dark theme)
     text: {
-      primary: '#f8fafc',     // Main text (light)
-      secondary: '#cbd5e1',   // Secondary text
-      tertiary: '#94a3b8',    // Tertiary text
-      disabled: '#64748b',    // Disabled text
+      primary: '#f1f5f9',     // Main text (lighter for better contrast)
+      secondary: '#e2e8f0',   // Secondary text (lighter)
+      tertiary: '#cbd5e1',    // Tertiary text
+      disabled: '#94a3b8',    // Disabled text
       inverse: '#0f172a',     // Text on light backgrounds
-      link: '#fb923c',        // Link color (lighter orange)
-      linkHover: '#f97316',   // Link hover color
+      link: '#fdba74',        // Link color (lighter orange for dark mode)
+      linkHover: '#fb923c',   // Link hover color
     },
 
     // Border Colors (dark theme)

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Switch, Space, Typography, Button } from 'antd';
 import { MoonOutlined, SunOutlined, SettingOutlined } from '@ant-design/icons';
@@ -6,18 +6,15 @@ import colorConstants from '../constants/colorConstant';
 
 const { Text } = Typography;
 
-const SettingPopup = ({ isDarkMode, onThemeChange }) => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
+const SettingPopup = ({
+  isDarkMode,
+  onThemeChange,
+  showModal,
+  isModalVisible,
+  onModalClose,
+  showTriggerButton = true
+}) => {
   const currentColors = isDarkMode ? colorConstants.dark : colorConstants.light;
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
 
   const handleThemeChange = (checked) => {
     onThemeChange(checked);
@@ -35,29 +32,34 @@ const SettingPopup = ({ isDarkMode, onThemeChange }) => {
     },
     body: {
       background: currentColors.background.primary,
+      height: '80vh',
+      overflow: 'auto',
+      padding: '20px'
     }
   };
 
   return (
     <>
-      {/* Settings Button Trigger */}
-      <Button
-        type="text"
-        icon={<SettingOutlined />}
-        onClick={showModal}
-        style={{
-          width: '100%',
-          height: 40,
-          color: currentColors.text.inverse,
-          border: `1px solid ${currentColors.primary[600]}`,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'flex-start',
-          padding: '0 16px',
-        }}
-      >
-        Settings
-      </Button>
+      {/* Settings Button Trigger (optional) */}
+      {showTriggerButton && (
+        <Button
+          type="text"
+          icon={<SettingOutlined />}
+          onClick={showModal}
+          style={{
+            width: '100%',
+            height: 40,
+            color: currentColors.text.inverse,
+            border: `1px solid ${currentColors.primary[600]}`,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            padding: '0 16px',
+          }}
+        >
+          Settings
+        </Button>
+      )}
 
       {/* Settings Modal */}
       <Modal
@@ -67,9 +69,9 @@ const SettingPopup = ({ isDarkMode, onThemeChange }) => {
           </Typography.Title>
         }
         open={isModalVisible}
-        onCancel={handleCancel}
+        onCancel={onModalClose}
         footer={[
-          <Button key="close" onClick={handleCancel}>
+          <Button key="close" onClick={onModalClose}>
             Close
           </Button>
         ]}
@@ -79,12 +81,6 @@ const SettingPopup = ({ isDarkMode, onThemeChange }) => {
           maxWidth: 'none',
         }}
         styles={modalStyles}
-        bodyStyle={{
-          height: '80vh',
-          overflow: 'auto',
-          background: currentColors.background.primary,
-          padding: '20px'
-        }}
       >
         <Space direction="vertical" size="large" style={{ width: '100%' }}>
           {/* Theme Settings Section */}
@@ -192,6 +188,17 @@ const SettingPopup = ({ isDarkMode, onThemeChange }) => {
 SettingPopup.propTypes = {
   isDarkMode: PropTypes.bool.isRequired,
   onThemeChange: PropTypes.func.isRequired,
+  showModal: PropTypes.func,
+  isModalVisible: PropTypes.bool,
+  onModalClose: PropTypes.func,
+  showTriggerButton: PropTypes.bool,
+};
+
+SettingPopup.defaultProps = {
+  showModal: () => { },
+  isModalVisible: false,
+  onModalClose: () => { },
+  showTriggerButton: true,
 };
 
 export default SettingPopup;

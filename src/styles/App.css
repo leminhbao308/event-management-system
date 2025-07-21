@@ -19,6 +19,27 @@ body {
   height: 100vh;
 }
 
+/* Dark mode text improvements */
+.ant-typography,
+.ant-typography-title,
+.ant-typography-paragraph,
+.ant-btn,
+.ant-menu-item,
+.ant-layout {
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Ensure text is visible in dark mode */
+[data-theme="dark"] .ant-typography,
+[data-theme="dark"] .ant-typography-title,
+[data-theme="dark"] .ant-typography-paragraph {
+  color: #f1f5f9 !important;
+}
+
+[data-theme="dark"] .ant-typography-caption {
+  color: #e2e8f0 !important;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

@@ -23,6 +23,7 @@ export const ThemeProvider = ({ children }) => {
       colorBorder: currentColors.border.medium,
       colorText: currentColors.text.primary,
       colorTextSecondary: currentColors.text.secondary,
+      colorTextTertiary: currentColors.text.tertiary,
       borderRadius: 8,
     },
     components: {
@@ -42,6 +43,7 @@ export const ThemeProvider = ({ children }) => {
         colorPrimary: currentColors.primary[500],
         colorPrimaryHover: currentColors.primary[400],
         colorPrimaryActive: currentColors.primary[600],
+        colorText: currentColors.text.primary,
       },
       Popover: {
         colorBgElevated: currentColors.background.card,
@@ -52,6 +54,11 @@ export const ThemeProvider = ({ children }) => {
         headerBg: currentColors.background.card,
         colorText: currentColors.text.primary,
         colorTextHeading: currentColors.text.primary,
+      },
+      Typography: {
+        colorText: currentColors.text.primary,
+        colorTextSecondary: currentColors.text.secondary,
+        colorTextTertiary: currentColors.text.tertiary,
       },
     },
   }), [currentColors]);
